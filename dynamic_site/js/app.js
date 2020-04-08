@@ -35,7 +35,7 @@ function getProductView(item){
                     <div>
                         <img src="${item.image_path}" alt="${item.product_name}">
                         
-                        <h4>${item.product_name}</h4>
+                        <h4 class="productName">${item.product_name}</h4>
                         <p class="productDes">${description}<p/>
                        
                         <h3>$${item.avg_price}</h3>
@@ -116,6 +116,7 @@ function getProductsBySearch(search){
             $.each(data.products, function(i,item){
                 // getProductView makes the output the same between get product by search and by department
                 content+= getProductView(item);
+                
             });
         }
         $(".product_list").html(content);
@@ -171,6 +172,7 @@ function buildCart() {
 
     // loop through cart to get the purchased item data
     $.each(myProducts, function (i, item) {
+        console.log(item,'eaeaeaeach');
         var item_number = i + 1;
         var quantity = myCart[item.id];
         var extended_price = parseInt(quantity) * parseFloat(item.avg_price);
@@ -191,7 +193,7 @@ function buildCart() {
                             <p class="cart_quantity_${item.id}" data-id="${item.id}">${quantity}</p>
                             <button class="cart_minus" data-id="${item.id}">–</button>
                         </div>
-                        <button class="remove cart_delete" data-id="${item.id}">✕ Remove Item</button>
+                        <button class="remove cart_delete" data-id="${item.id}">✕ Remove</button>
                         </div>
                         <div class="itemPrice">$${avgPrice}</div>
                         <div class="itemPrice">$${extendPrice}</div>
@@ -206,37 +208,31 @@ function buildCart() {
     var total = hst + sub_total;
     var TOTAL = total.toFixed(2);
 
-    subTotalContent +=  `<div class="grid-x">
-                            <div class="large-7  medium-7 small-5 cell"></div>
-                            <div class="large-2 medium-2 small-3 cel">
+    subTotalContent +=  `<div class="">
+                            <div class=""></div>
+                            <div class="">
                                 Subtotal
                             </div>
-                            <div class="large-2 medium-2 small-3 cel">$${subTotal}</div>
-                            <div class="large-1 medium-1 small-1 cel"></div>
+                            <div class="alignRight">$${subTotal}</div>
+                            
                         </div> 
-                        <div class="grid-x">
-                            <div class="large-7  medium-7 small-5 cell"></div>
-                            <div class="large-2 medium-2 small-3 cel">
+                        <div class="">
+                            <div class=""></div>
+                            <div class="">
                                 Hst.
                             </div>
-                            <div class="large-2 medium-2 small-3 cel">$${HST}</div>
-                            <div class="large-1 medium-1 small-1 cel"></div>
+                            <div class="alignRight">$${HST}</div>
+                            
                         </div> 
 
-                        <div class="grid-x totalPrice">
-                            <div class="large-7  medium-7 small-5 cell"></div>
-                            <div class="large-2 medium-2 small-3 cel">
+                        <div class="totalPrice">
+                            <div class=""></div>
+                            <div class="total">
                                 Total
                             </div>
-                            <div class="large-2 medium-2 small-3 cel">$${TOTAL}</div>
-                            <div class="large-1 medium-1 small-1 cel"></div>
-                        </div> 
-                        
-                       
-
-                        
-                        
-                      </div>`;
+                            <div class="total alignRight">$${TOTAL}</div>
+                            
+                        </div> `;
     
     // output content in cart-data section 
     
@@ -285,6 +281,9 @@ function getProductsByCart() {
 
 $(document).ready(function(){
 
+    $('.checkout').click(function(){
+        alert('Your Order is submitted');
+    });
 
     $(".close").click(function(){
         $('#cart').hide();
@@ -394,7 +393,7 @@ $(document).ready(function(){
 
     /************************* fill in cart page when clicking on the shopping cart icon **************************/
 
-    $('.shoppingCart').click(
+    $('.shoppingCart, .cartCircle').click(
         function(){
            
             getProductsByCart();
@@ -427,7 +426,7 @@ $(document).ready(function(){
         var product_id = $(this).attr("data-id");
         delete myCart[product_id];
         var size = Object.size(myCart);
-        console.log(myCart);
+        
         $(".cartCircle").html(size);
         var deleteItem;
         $.each(myProducts, function (i, item) {
@@ -439,7 +438,7 @@ $(document).ready(function(){
             myProducts.splice(deleteItem, 1);
         }
         if (size === 0) {
-            buildEmptyCart();
+            buildCart();
         } else {
             buildCart();
         }

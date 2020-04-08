@@ -67,19 +67,21 @@ header input{
 .cart span{
     position: absolute;
     display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     background-color: red;
     border-radius: 50%;
     z-index: 100;
     color: white;
     text-align: center;
-    font-size: 13px;
-    line-height: 18px;
+    font-size: 15px;
+    line-height: 20px;
     font-family: arial;
     right: 40px;
 }
-
+.cart span:hover{
+    cursor: pointer;
+}
 .service{
     width: 100%;
     display: flex;
@@ -114,10 +116,10 @@ header input{
 }
 .banner{
     width: 100%;
-    height: 300px;
-    background-image: url("../img/hotpot.jpg");
+    height: 400px;
+    background-image: url("../img/bg.jpg");
     background-size: cover;
-    background-position:center;
+    background-position:center 75%;
 }
 .banner img{
     width: 100%;
@@ -138,7 +140,7 @@ header input{
     display: grid;
     grid-column-gap: 25px;
     grid-row-gap: 40px;
-    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+    grid-template-columns: repeat( auto-fit, minmax(280px, 1fr) );
 }
 .item>div{
     padding:10px;
@@ -229,13 +231,7 @@ footer{
     width: 90%;
     margin: 5px auto;
 }
-.subtotal, .hst, .total{
-    display: flex;
-}
-.subtotal div, .hst div, .total div{
-    flex: 1;
-    text-align: center;
-}
+
 .searchDiv{
     position: relative;
 }
@@ -273,7 +269,7 @@ footer{
 }
 .item div button{
     position: absolute;
-    bottom: 20px;
+    bottom: 40px;
     right: 25px;
     height: 22px;
     line-height: 22px;
@@ -310,7 +306,7 @@ footer{
     top: 50px;
     left: 20px;
     display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(240px, 1fr) );
+    grid-template-columns: repeat( auto-fit, minmax(280px, 1fr) );
     color: black;
     text-align: left;
     z-index: 100;
@@ -331,7 +327,7 @@ a{
     display: grid;
     grid-column-gap: 25px;
     grid-row-gap: 40px;
-    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+    grid-template-columns: repeat( auto-fit, minmax(280px, 1fr) );
     padding: 10px 20px;
     margin-top: 30px;
     
@@ -357,7 +353,7 @@ a{
 }
 .amount{
     position: absolute;
-    right: 30px;
+    right: 40px;
     bottom: 60px;
     width: 90px;
     height: 18px;
@@ -376,30 +372,36 @@ a{
     background-color:grey;
     color: white;
     font-size: 26px;
-    line-height: 18px;
+    line-height: 17px;
+    border:1px grey solid;
+    box-sizing: border-box;
+    height: 22px;
 }
 .amount .plus{
     background-color:grey;
     color: white;
     font-size: 18px;
-  
+    border:1px grey solid;
+    box-sizing: border-box;
+    height: 22px;
 }
 .amount .minus:hover, .amount .plus:hover{
     cursor: pointer;
 }
-.product_list>div{
+.product_list>div, .item>div{
     padding: 10px 15px;
     padding-top: 20px;
 }
-.product_list>div h3{
-    margin-left: 10px;
+.product_list>div h3, .item>div h3{
+    margin-left: 15px;
+    margin-top: 0px;
     font-size: 24px;
 }
 
-.product_list div button{
+.product_list div button, .item div button{
     position: absolute;
     bottom: 18px;
-    right: 25px;
+    right: 35px;
     height: 28px;
     line-height: 24px;
     width: 100px;
@@ -439,6 +441,7 @@ a{
 .cartContent{
     overflow: scroll;
     font-family: arial;
+    margin-bottom: 10px;
 }
 #cart{
     display: none;
@@ -464,7 +467,22 @@ a{
     grid-template-columns: 1fr 1.5fr 1fr;
     width: 60px;
     margin: 0 auto;
-    margin-top: 18px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+.cart_plus, .cart_minus{
+    border:1px white solid;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    line-height: 16px;
+    padding-bottom: 5px;
+    
+}
+.cart_plus:hover, .cart_minus:hover{
+    border:grey 1px solid;
+    color: grey;
+    background-color: #fff;
 }
 .itemPrice{
     line-height: 70px;
@@ -489,13 +507,76 @@ a{
 }
 .productDes{
     margin-bottom: 15px;
+    margin-top: 5px;
+    font-size: 14px;
+    height: 30px;
 }
 
+.checkout{
+    position: absolute;
+    left: 10vw;;
+    bottom: 45px;
+    width: 110px;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 6px;
+    background-color: #f06131;
+    border: none;
+    color:white;
+    text-align: center;
+}
+.checkout:hover{
+    cursor: pointer;
+}
+.subtotal>div{
+    
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.total{
+    font-size: 22px;
+}
+.item{
+  padding: 0 2vw;
+}
 
+.special h2{
+    margin-left: 2vw;
+    margin-top: 30px;
+}
+.close:hover, .cart_plus:hover, .cart_minus:hover, .cart_delete:hover{
+    cursor: pointer;
+}
+.minus:hover, .plus:hover{
+    border: 1px grey solid;
+    color: grey;
+    box-sizing: border-box;
+    background-color: #fff;    
 
+}
+.productName{
+    font-size: 17px;
+    letter-spacing: 0.1px;
+}
+.alignRight{
+    text-align: right;
+    padding-right: 40%;
+}
 
-
-
+.cart_delete{
+    height: 18px;
+    line-height: 18px;
+    background-color: lightgrey;
+    padding: 0 5px;
+    border-radius: 4px;
+    border:none;
+}
+.cart_delete:hover{
+    background-color: orange;
+}
 
 
 
@@ -571,7 +652,7 @@ a{
     .cart span{
         position: absolute;
         right: 20px;
-        top: -120px; 
+        top: -126px; 
     }
     .bar{
         display: block;
@@ -584,7 +665,7 @@ a{
         cursor: pointer;
     }
     .banner{
-        height: 200px;
+        height: 250px;
         overflow: hidden;
         background-size: cover;
 
@@ -603,11 +684,40 @@ a{
     .productTitle{
         font-size: 16px;
     }
+    .supermarket ul{
+        width: 100vw;
+        left: 0px;
+    }
 }
 
 
 
 
+@media only screen and (max-width:650px){
+    .banner{
+        height: 200px;
+        overflow: hidden;
+        background-size: cover;
+
+    }
+
+    .cartPage{
+        position: fixed;
+        width: 100%;
+        height: 90%;
+        top: 5%;
+        left: 0;
+        background-color: #fff;
+        border-radius: 3%;
+        border:2px grey solid;
+        overflow: hidden;
+        z-index: 2020;
+    }
+    .itemName{
+        font-size: 14px;
+    }
+    
+}
 
 
 
