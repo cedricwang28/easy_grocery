@@ -4,6 +4,9 @@
     box-sizing: border-box;
 }
 
+.special  img{
+    transform: scale(0.8);
+}
 
 
 
@@ -49,19 +52,34 @@ header input{
 
 .cart{
     margin-top: 25px;
-    height: 2.4rem;
-    width: 90px;
-    border-radius: 20px;
-    font-size: 16px;
+    height: 3rem;
+    position: relative;
 }
 .cart img{
-    width: 20px;
+    width: 40px;
+    position: absolute;
+    right: 40px;
+    top:3px;
+}
+.shoppingCart:hover{
+    cursor: pointer;
 }
 .cart span{
+    position: absolute;
     display: inline-block;
-    transform: translate(3px,-3px);
-   
+    width: 18px;
+    height: 18px;
+    background-color: red;
+    border-radius: 50%;
+    z-index: 100;
+    color: white;
+    text-align: center;
+    font-size: 13px;
+    line-height: 18px;
+    font-family: arial;
+    right: 40px;
 }
+
 .service{
     width: 100%;
     display: flex;
@@ -78,9 +96,9 @@ header input{
 }
 .category{
     width: 100%;
-    height: 90px;
+    height: auto;
     background-color: #45433f;
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     
 }
@@ -172,6 +190,8 @@ footer{
     background-color: #fff;
     border-radius: 3%;
     border:3px grey solid;
+    overflow: hidden;
+    z-index: 2020;
 }
 .cartPage h1{
     text-align: center;
@@ -185,21 +205,14 @@ footer{
 }
 .cartContent{
     width: 90%;
-    height: 50%;
+    height: 65%;
     margin:0 auto;
     border-top: 1px black solid;
     border-bottom: 1px black solid;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    
     margin-top: 10px;
 }
-.cartContent div{
-    text-align: center;
-    padding-top: 10px;
-}
-.cartContent div h3{
-    margin-bottom: 10px;
-}
+
 .quant{
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
@@ -263,6 +276,7 @@ footer{
     bottom: 20px;
     right: 25px;
     height: 22px;
+    line-height: 22px;
     width: 100px;
     font-size: 14px;
     background-color:#f06131;
@@ -292,11 +306,11 @@ footer{
     list-style: none;
     width: 80vw;
     background-color: white;
-    box-shadow: 5px 5px 10px rgba(22,22,22,0.2);
-    top: 60px;
-    left: 1px;
+    box-shadow: 0px 5px 10px rgba(22,22,22,0.2);
+    top: 50px;
+    left: 20px;
     display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(200px, 1fr) );
+    grid-template-columns: repeat( auto-fit, minmax(240px, 1fr) );
     color: black;
     text-align: left;
     z-index: 100;
@@ -304,8 +318,9 @@ footer{
 }
 .supermarket ul li{
     box-sizing: border-box;
-    padding-left: 7px;
+    padding-left: 10px;
     font-family: 'Gotu', sans-serif;
+    
 }
 a{
     color: black;
@@ -319,6 +334,7 @@ a{
     grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
     padding: 10px 20px;
     margin-top: 30px;
+    
 }
 .product_list>div{
     padding:10px;
@@ -334,6 +350,7 @@ a{
 }
 .product_list h4{
     color: grey;
+    margin-top: 15px;
 }
 .product_list h3{
     line-height: 70px;
@@ -341,9 +358,9 @@ a{
 .amount{
     position: absolute;
     right: 30px;
-    bottom: 50px;
+    bottom: 60px;
     width: 90px;
-    height: 20px;
+    height: 18px;
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     z-index: 88;
@@ -353,22 +370,38 @@ a{
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
-    border: 1px solid #f9bd6d;
+    /* border: 1px solid grey; */
 }
 .amount .minus{
-    background-color:#f9bd6d;
-    color: white
+    background-color:grey;
+    color: white;
+    font-size: 26px;
+    line-height: 18px;
 }
 .amount .plus{
-    background-color:#f9bd6d;
-    color: white
+    background-color:grey;
+    color: white;
+    font-size: 18px;
+  
+}
+.amount .minus:hover, .amount .plus:hover{
+    cursor: pointer;
+}
+.product_list>div{
+    padding: 10px 15px;
+    padding-top: 20px;
+}
+.product_list>div h3{
+    margin-left: 10px;
+    font-size: 24px;
 }
 
 .product_list div button{
     position: absolute;
-    bottom: 20px;
+    bottom: 18px;
     right: 25px;
-    height: 22px;
+    height: 28px;
+    line-height: 24px;
     width: 100px;
     font-size: 14px;
     background-color:#f06131;
@@ -388,7 +421,80 @@ a{
 }
 .products{
     display: none;
+    padding: 0 2vw;
 }
+
+
+.cartField{
+    /* width: 100%; */
+    height: 40px;
+    display:flex;
+    
+    line-height: 40px;
+}
+.cartField>div{
+    flex: 1;
+    text-align: center;
+}
+.cartContent{
+    overflow: scroll;
+    font-family: arial;
+}
+#cart{
+    display: none;
+}
+
+.cartDetail{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    text-align: center;
+    border-bottom:1px grey dashed;
+    width: 100%;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+.cartDetail img{
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+    
+}
+.numTag{
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    width: 60px;
+    margin: 0 auto;
+    margin-top: 18px;
+}
+.itemPrice{
+    line-height: 70px;
+}
+.overlay{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom:0;
+    background-color: rgba(22,22,22,0.7);
+    z-index: 200;
+    display: none;
+}
+.addToCart:hover{
+    background-color: #fff;
+    border:2px solid #f06131;
+    color: #f06131;
+    line-height: 16px;
+    cursor: pointer;
+    
+}
+.productDes{
+    margin-bottom: 15px;
+}
+
+
+
+
+
 
 
 
@@ -406,12 +512,22 @@ a{
         font-size: 20px;
     }
     
-    nav{
+    .service{
+        display: none;
+        border:1px grey solid;
+        border-bottom: 5px solid grey;
+        transform: translate(0,-20px);
+        z-index: 200;
+    }
+    .category{
         display: none;
     }
     .header{
         grid-template-columns: 1fr;
         margin-bottom: 20px;
+    }
+    header{
+        position: relative;
     }
     .searchDiv{
         box-sizing: border-box;
@@ -437,22 +553,35 @@ a{
         height: 55%;
     }
     .logo{
-        text-align: start;
+        text-align: center;
         font-size: 1.8rem;
         margin-left: 3vw;
     }
     .cart{
-        transform: scale(0.8);
+     
+        height: 0;
+        
+    }
+    .cart img{
         position: absolute;
-        top: 0vh;
         right: 20px;
+        top: -120px; 
+        width: 35px;
+    }
+    .cart span{
+        position: absolute;
+        right: 20px;
+        top: -120px; 
     }
     .bar{
         display: block;
         position: absolute;
         top: 32px;
-        right: 120px;
+        left: 20px;
         width: 25px;
+    }
+    .bar:hover{
+        cursor: pointer;
     }
     .banner{
         height: 200px;
@@ -465,4 +594,22 @@ a{
         width: 100%;
         
     }
+    .service div{
+        display: block;
+        background-color: #fff;
+       
+        
+    }
+    .productTitle{
+        font-size: 16px;
+    }
 }
+
+
+
+
+
+
+
+
+

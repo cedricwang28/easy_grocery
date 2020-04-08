@@ -13,7 +13,13 @@ Object.size = function (obj) {
 };
 
 
-
+String.prototype.trunc = function (n, useWordBoundary) {
+    if (this.length <= n) {
+        return this;
+    }
+    var subString = this.substr(0, n - 1);
+    return (useWordBoundary ? subString.substr(0, subString.lastIndexOf(' ')) : subString) + "&hellip;";
+};
 
 function get_splash(){
     $('.products').hide();
@@ -21,24 +27,30 @@ function get_splash(){
 
 }
 
-
+//get each product
 function getProductView(item){
+    var description = item.product_description.trunc (60, true);
+
     var content = ` 
                     <div>
                         <img src="${item.image_path}" alt="${item.product_name}">
+                        
                         <h4>${item.product_name}</h4>
-                        <h3>${item.avg_price}</h3>
+                        <p class="productDes">${description}<p/>
+                       
+                        <h3>$${item.avg_price}</h3>
                         <div class="amount">
                             <div class="minus" data-id=${item.id}>-</div>
-                            <div data-id=${item.id} class="uantity_${item.id}">1</div>
+                            <div data-id=${item.id} class="quantity_${item.id}">1</div>
                             <div class="plus" data-id=${item.id}>+</div>
                         </div>
-                        <button data-id=${item.id}>Add to cart</button>
+                        <button class="addToCart" data-id=${item.id}>Add to Cart</button>
                     </div>
     `;
     return content; 
 }
 
+//get certain department
 function getProductsByDepartments(department_id){
     
     $('.splash').hide();
@@ -76,10 +88,12 @@ function getProductsByDepartments(department_id){
 
 }
 
+
+//search
 function getProductsBySearch(search){
-    $('.hide_all').hide();
-    $('#products').fadeIn();
-    // alert(department_id);
+    $('.splash').hide();
+    $('.products').show();
+    
     var getProducts = $.ajax({
         url: "services/get_products_by_search.php",
         type: "POST",
@@ -95,7 +109,7 @@ function getProductsBySearch(search){
     });
 
     getProducts.done(function(data){
-        // alert(data);
+        
         var content="";
         // in php, it's throwing back a string, the error number
         if (data.error.id=="0") {
@@ -109,6 +123,8 @@ function getProductsBySearch(search){
     });
 
 }
+
+//get all departments
 function get_departments(){
     $(".hide_all").hide();
     // alert("get_departments");
@@ -143,31 +159,15 @@ function get_departments(){
     $("#splash").fadeIn();
 }
 
-function buildEmptyCart() {
-    var content;
-    content = `<h1>Your cart is empty</h1>
-    <i class="fas fa-shopping-cart"></i>`;
-    $('.cart_data').html(content);
-    $('.cart_data').addClass('emptyCart');
 
-}
 function buildCart() {
 
     var sub_total = 0.00;
-    var content;
-    var mainContent;
-    var subTotalContent;
+   
+    var mainContent = '';
+    var subTotalContent ='';
 
-    // print the title of cart
-    content = `<ul class="menu expanded" >
-                    <li>Item</li>
-                    <li>Quantity</li>
-                    <li>Price</li>
-                    <li>Ext.Price</li>
-                </ul>
-                <div class="main-cart"></div>
-                <div class="subtotal"></div>
-                `;
+    
 
     // loop through cart to get the purchased item data
     $.each(myProducts, function (i, item) {
@@ -179,14 +179,13 @@ function buildCart() {
         var avgPrice = avg_price.toFixed(2);
         sub_total = sub_total + extended_price;
 
-        mainContent += `<div class="grid-x cartDetail">
-                        <div class="large-3 medium-3 cel cartImg">
+        mainContent += `<div class=" cartDetail">
+                        <div class="cartImg">
                             <img src="${item.image_path}" alt="${item.product_name}">
-                            <button class="remove1 cart_delete" data-id="${item.id}">✕ Remove Item</button>
-                            <p class="itemName itemName1">${item.product_name}</p>
+                            <p class="itemName itemName2">${item.product_name}</p>
                         </div>
-                        <p class="itemName itemName2">${item.product_name}</p>
-                        <div class="large-3 medium-3  cel numTagWrapper">
+                        
+                        <div class="numTagWrapper">
                         <div class="numTag">
                             <button class="cart_plus" data-id="${item.id}">+</button>
                             <p class="cart_quantity_${item.id}" data-id="${item.id}">${quantity}</p>
@@ -194,8 +193,8 @@ function buildCart() {
                         </div>
                         <button class="remove cart_delete" data-id="${item.id}">✕ Remove Item</button>
                         </div>
-                        <div class="large-3 medium-3 cel">$${avgPrice}</div>
-                        <div class="large-3 medium-3 cell total">$${extendPrice}</div>
+                        <div class="itemPrice">$${avgPrice}</div>
+                        <div class="itemPrice">$${extendPrice}</div>
                     </div>`;
         // $('.cart_wrapper').show();
     })
@@ -233,18 +232,14 @@ function buildCart() {
                             <div class="large-1 medium-1 small-1 cel"></div>
                         </div> 
                         
-                        <div class="grid-x checkOutBtn">
+                       
 
-                        <div class="large-8  medium-8 small5 cell"></div>
-                        <div class="large-3 medium-3 small-6 cel checkOutBtnCell">
-                            <input type="button" value="Checkout">
-                        </div>
-                        <div class="large-1 medium-1 small-1 cel"></div>
+                        
                         
                       </div>`;
     
     // output content in cart-data section 
-    $('.cart_data').removeClass('emptyCart');
+    
     $('.cart_data').html(content);
     $('.main-cart').html(mainContent);
     $('.subtotal').html(subTotalContent);
@@ -253,11 +248,11 @@ function buildCart() {
 
 function getProductsByCart() {
 
-    $('.hide_all').hide();
     $('#cart').fadeIn();
+    $('.overlay').show();
 
     var json = JSON.stringify(myCart);
-    console.log(json);
+    console.log(json,'jjjjj');
 
     var getCart = $.ajax({
         url: "services/get_products_by_cart.php",
@@ -268,9 +263,7 @@ function getProductsByCart() {
         dataType: "json"
     });
 
-    getCart.fail(function (jqXHR, textStatus) {
-        buildEmptyCart();
-    });
+    
 
     getCart.done(function (data) {
 
@@ -293,6 +286,11 @@ function getProductsByCart() {
 $(document).ready(function(){
 
 
+    $(".close").click(function(){
+        $('#cart').hide();
+        $('.overlay').hide();
+    });
+    
     get_departments();
     $('.supermarket ul').hide();
     /************************* get department lists on the menu once loaded **************************/
@@ -309,6 +307,10 @@ $(document).ready(function(){
         get_splash();
     });
 
+    $('.bar').click(function(){
+        $('.service').toggle();
+    });
+
     /************************* fill in products page when by departments or by search **************************/
 
     $(document).on('click',"body .getProductsByDepartments", function(e){
@@ -320,15 +322,33 @@ $(document).ready(function(){
     });
 
     // for return back what we type in, we use keyup function 
-    document.querySelectorAll('.search').forEach((search) => {
-        search.addEventListener('keyup', function(){
-            var search = $(this).val();
-            console.log(search);
-            $('.catTitle').text(`Search Results Ror "${search}"`);
-            $('.catTitle').addClass('searchResults');
-            getProductsBySearch(search);
-        })
+    // document.querySelectorAll('.searchText').forEach((search) => {
+    //     search.addEventListener('keyup', function(){
+    //         var search = $(this).val();
+    //         console.log(search);
+    //         $('.catTitle').text(`Search Results Ror "${search}"`);
+    //         $('.catTitle').addClass('searchResults');
+    //         getProductsBySearch(search);
+    //     })
     
+    // });
+    let search;
+
+    document.querySelector('.search').addEventListener('click',function(){
+        search = document.querySelector('.searchText').value;
+        getProductsBySearch(search);
+        $('.productTitle').text(`Search Results for "${search}"`);
+        document.querySelector('.searchText').value = '';
+    });
+
+    document.querySelector('.searchText').addEventListener('keyup',function(e){
+        search = document.querySelector('.searchText').value;
+
+        if(e.keyCode == 13){
+            getProductsBySearch(search);
+            $('.productTitle').text(`Search Results for "${search}"`); 
+            document.querySelector('.searchText').value = '';
+        }
     });
 
     /************************* clicking plus, minus, addtocart on the products page **************************/
@@ -355,10 +375,9 @@ $(document).ready(function(){
 
     $(document).on('click',"body .addToCart", function(){
         var product_id = $(this).attr("data-id");
-        console.log(product_id);
-        // alert(product_id);
-        var quantity = parseInt($('.quantity_'+ product_id).html());
         
+        var quantity = parseInt($('.quantity_'+ product_id).html());
+            
         if (myCart[product_id] != undefined) {
             var currentValue = myCart[product_id];
             myCart[product_id] = parseInt(quantity) + parseInt(currentValue);
@@ -366,7 +385,7 @@ $(document).ready(function(){
             myCart[product_id] = quantity;
         }
 
-        console.table(myCart);
+        console.table(myCart,"cart");
 
         var size = Object.size(myCart);
         $('.cartCircle').html(size);
@@ -377,6 +396,7 @@ $(document).ready(function(){
 
     $('.shoppingCart').click(
         function(){
+           
             getProductsByCart();
             $('.cart-section').show();
         }

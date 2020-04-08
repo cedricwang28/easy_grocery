@@ -14,16 +14,22 @@
 </head>
 
 <body>
+    <div class="overlay"></div>
+
     <div class="top"></div>
     <header>
         <div class="header">
             <div class="logo"><span class="easy">Easy</span> <span class="grocery">Groceries</span></div>
             <div class="searchDiv">
-                <input type="text" placeholder="Search by product"></input>
+                <input type="text" placeholder="Search by product" class="searchText"></input>
                 <button class="search"><img src="./img/search.webp"></button>
             </div>
-            <div>
-                <button class="cart"><img src="./img/cart.png" alt=""><span>Cart</span></button>
+            <div class="cart">
+                
+                <img src="./img/cart.png" alt="" class="shoppingCart">
+                <span class="cartCircle">0</span>
+                
+                
             </div>
             <img src="./img/bar.png" alt="" class="bar">
         </div>
@@ -45,15 +51,15 @@
             </div>
             <div class="category">
                 <div>Fruit & Vegetables</div>
-                <div>Dairy Products & Eggs</div>
+                <div>Dairy Products</div>
                 <div>Meat & Fish</div>
-                <div>Bread & Baked Goods</div>
+                <div>Baked Goods</div>
                 <div>Food Cupboard</div>
                 <div>Sweets & Snack</div>
-                <div>Frozen Food & Ready-Made Meals</div>
+                <div>Frozen Food</div>
                 <div>Drinks</div>
                 <div>Household & Cleaning</div>
-                <div>Beauty,Health,Clothes & Baby</div>
+                <div>Beauty,Health</div>
             </div>
         </nav>
 
@@ -79,44 +85,79 @@
                 </div>
                 <div>
                     <img src="./img/item.jpg" alt="">
-                    <h4>Ferrero Rocher T-24 Gift Box</h4>
-                    <h3>$7.99</h3>
+                    <h4>Carl Jung Chardonnay De-Alcoholized Wine</h4>
+                    <h3>$12.99</h3>
+                    <div class="amount">
+                        <div class="minus">-</div>
+                        <div>1</div>
+                        <div class="plus">+</div>
+                    </div>
                     <button>Add to cart</button>
                 </div>
                 <div>
                     <img src="./img/item.jpg" alt="">
                     <h4>Ferrero Rocher T-24 Gift Box</h4>
                     <h3>$7.99</h3>
+                    <div class="amount">
+                        <div class="minus">-</div>
+                        <div>1</div>
+                        <div class="plus">+</div>
+                    </div>
                     <button>Add to cart</button>
                 </div>
                 <div>
                     <img src="./img/item.jpg" alt="">
                     <h4>Ferrero Rocher T-24 Gift Box</h4>
                     <h3>$7.99</h3>
+                    <div class="amount">
+                        <div class="minus">-</div>
+                        <div>1</div>
+                        <div class="plus">+</div>
+                    </div>
                     <button>Add to cart</button>
                 </div>
                 <div>
                     <img src="./img/item.jpg" alt="">
                     <h4>Ferrero Rocher T-24 Gift Box</h4>
                     <h3>$7.99</h3>
+                    <div class="amount">
+                        <div class="minus">-</div>
+                        <div>1</div>
+                        <div class="plus">+</div>
+                    </div>
                     <button>Add to cart</button>
                 </div>
                 <div>
                     <img src="./img/item.jpg" alt="">
                     <h4>Ferrero Rocher T-24 Gift Box</h4>
                     <h3>$7.99</h3>
+                    <div class="amount">
+                        <div class="minus">-</div>
+                        <div>1</div>
+                        <div class="plus">+</div>
+                    </div>
                     <button>Add to cart</button>
                 </div>
                 <div>
                     <img src="./img/item.jpg" alt="">
                     <h4>Ferrero Rocher T-24 Gift Box</h4>
                     <h3>$7.99</h3>
+                    <div class="amount">
+                        <div class="minus">-</div>
+                        <div>1</div>
+                        <div class="plus">+</div>
+                    </div>
                     <button>Add to cart</button>
                 </div>
                 <div>
                     <img src="./img/item.jpg" alt="">
                     <h4>Ferrero Rocher T-24 Gift Box</h4>
                     <h3>$7.99</h3>
+                    <div class="amount">
+                        <div class="minus">-</div>
+                        <div>1</div>
+                        <div class="plus">+</div>
+                    </div>
                     <button>Add to cart</button>
                 </div>
             </div>
@@ -125,11 +166,49 @@
     </main>
 
     <main class="products">
-            <h3 class="productTitle">111</h3>
+            <h3 class="productTitle"></h3>
             <div  class="product_list">
     
             </div>
     </main>
+
+
+    
+
+    <div class="cartPage" id="cart">
+        <img src="./img/close.png" alt="" class="close">
+        <h1>Cart</h1>
+        <div class="cartContent">
+            <div class="cartField">
+                <div>
+                    <h4>Item</h4>
+                </div>
+                <div>
+                    <h4>Quantity</h4>
+                </div>
+                <div>
+                    <h4>Price</h4>
+                </div>
+                <div>
+                    <h4>Ext.Price</h4>
+                </div>
+
+            </div>
+
+            <div class="main-cart">
+
+            </div>
+            
+        </div>
+
+        <div class="price subtotal">
+            
+        </div>
+    </div>
+
+
+
+    
 
     <footer>
         <p>© 2020 Easy Grocery Inc. All Rights Reserved.</p>
